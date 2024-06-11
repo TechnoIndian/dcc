@@ -6,66 +6,6 @@
 
 
 
-[![Stars](https://img.shields.io/github/stars/codehasan/Dex2C?color=yellow)](https://github.com/TeamUltroid/Ultroid/stargazers)
-[![Python](https://img.shields.io/badge/Python-v3.10.3-blue)](https://www.python.org/)
-[![Forks](https://img.shields.io/github/forks/codehasan/Dex2C?color=orange)](https://github.com/codehasan/Dex2C/fork)
-[![Size](https://img.shields.io/github/repo-size/codehasan/Dex2C?color=green)](https://github.com/codehasan/Dex2C/)
-[![Contributors](https://img.shields.io/github/contributors/codehasan/Dex2C?color=green)](https://github.com/codehasan/Dex2C/graphs/contributors)
-[![License](https://img.shields.io/badge/License-Apache-blue)](./LICENSE)
-
-
-  
-  <p align="center">
-    Method-based AOT compiler that can wrap Dalvik bytecode with JNI native code.
-  </p>
-</div>
-
-<!-- TABLE OF CONTENTS -->
-<summary>Table of contents</summary>
-  <ul>
-    <li>
-      <a href="#about-the-project">About the project</a>
-      <ul>
-        <li><a href="#built-with">Built with</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#installation">Installation</a>
-      <ul>
-        <li><a href="#linux">Linux</a></li>
-        <li><a href="#windows">Windows</a></li>
-        <li><a href="#termux">Android (Termux)</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#usage">Usage</a>
-        <ul>
-          <li><a href="#filters">Filters</a></li>
-          <li><a href="#protect-apps">Protect apps</a></li>
-        </ul>
-    </li>
-    <li><a href="#how-to-change-lib-name">How to change lib name</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ul>
-
-
-
-<!-- ABOUT THE PROJECT -->
-# About the project
-
-This project is a forked version of [amimo/dcc](https://github.com/amimo/dcc), which aims to make it easy for everyone to use this tool. We automated plenty of processes that you had to do manually in the original DCC. Moreover, we always try to add new features to make this tool more usable in real-world applications.
-Check out <a href="#roadmap">Roadmap</a> to know about the changes we made and also the changes we are planning to make in the feature.
-
-### Built with
-
-
-* ![Python][Python-Badge]
-* [![Androguard][Androguard-Badge]][Androguard_Repository]
-
-
 <!-- GETTING STARTED -->
 # Installation
 
@@ -77,7 +17,7 @@ Python 3.8 or higher is required for running this tool. So, make sure your pytho
    ```
 2. Open the cloned directory.
    ```bash
-   cd Dex2c
+   cd dcc
    ```
 3. Download **Apktool** latest version from [bitbucket](https://bitbucket.org/iBotPeaches/apktool/downloads/) and save it in `tools` folder with the name `apktool.jar`
    ```bash
@@ -85,36 +25,13 @@ Python 3.8 or higher is required for running this tool. So, make sure your pytho
    ```
 4. <a href="https://developer.android.com/ndk/downloads">Download</a> android NDK for your OS and extract it. Copy the folder path where `ndk-build` executable is located inside the extracted folder and configure `ndk_dir` in `dcc.cfg`
 
-### Linux
-
-![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
-
-1. Install required dependencies.
-   ```bash
-   pip3 insall -r requirements.txt
-   ```
-2. Install JRE/JDK if you don't have it installed. The recommended JDK version is 11.
-   ```bash
-   sudo apt-get install openjdk-11-jdk
-   ```
-
-### Windows
-
-![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
-
-1. Install required dependencies.
-   ```bash
-   pip3 install -r requirements.txt
-   ```
-2. Install JRE/JDK from <a href="https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html">oracle</a> if you don't have it installed. Search in Google, how to install JDK in Windows if you need more guidance on this topic. The recommended JDK version is 11.
-
 ### Termux
 
 ![Android](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)
 
 One Step Installation: Run Below Command
    ```bash
-pkg install wget -y && wget -O termux_install.sh https://raw.githubusercontent.com/TechnoIndian/dcc/master/termux_install.sh?token=GHSAT0AAAAAACTDT6FHS6MGUWVX2LJ72MDOZTIK4PA && chmod -R +x termux_install.sh && ./termux_install.sh
+pkg install wget -y && wget -O termux_install.sh https://github.com/TechnoIndian/dcc && chmod -R +x termux_install.sh && ./termux_install.sh
 ```
 > NOTE: Some users have reported about installation errors with latest `clang` on termux. If you happen to face the same issue, then uncomment the lines stated in `termux_install.sh` and then proceed with the installation.
 
@@ -212,49 +129,3 @@ Open `project/jni/Android.mk` file in the cloned directory. You will find a vari
     - [x] --force-keep-libs
     - [x] --obfuscate
 
-See the [open issues](https://github.com/codehasan/dex2c/issues) for a full list of proposed features and known issues.
-
-
-
-<!-- CONTRIBUTING -->
-# Contributing
-
-Contributions are what makes the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give this project a star! Thanks again!
-
-1. Fork the project
-2. Create your feature branch. (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes. (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch. (`git push origin feature/AmazingFeature`)
-5. Open a pull request.
-
-
-
-<!-- LICENSE -->
-# License
-
-Distributed under the Apache License. See `LICENSE.txt` for more information.
-
-
-
-<!-- ACKNOWLEDGMENTS -->
-# Acknowledgments
-
-### Projects
-
-* [DCC](https://github.com/amimo/dcc)
-* [Androguard](https://github.com/androguard/androguard)
-
-### People
-
-* Rahat - [Telegram](https://t.me/botxrahat)
-* GoldenBoot - [Telegram](https://t.me/goldenboot)
-
-<p align="right"><a href="#readme-top">Go to top</a></p>
-
-<!-- MARKDOWN LINKS & IMAGES -->
-[Python-Badge]: https://img.shields.io/badge/Python-F6D049?style=for-the-badge&logo=python
-[Androguard-Badge]: https://img.shields.io/badge/Androguard-FFFFFF?style=for-the-badge&logo=android
-[Androguard_Repository]: https://github.com/androguard/androguard
