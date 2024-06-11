@@ -73,7 +73,7 @@ Python 3.8 or higher is required for running this tool. So, make sure your pytho
 
 1. Clone the repo.
    ```bash
-   git clone https://github.com/TechnoIndian/Dex2c
+   git clone https://github.com/TechnoIndian/dcc
    ```
 2. Open the cloned directory.
    ```bash
