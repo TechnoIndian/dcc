@@ -73,11 +73,11 @@ Python 3.8 or higher is required for running this tool. So, make sure your pytho
 
 1. Clone the repo.
    ```bash
-   git clone https://github.com/codehasan/dex2c
+   git clone https://github.com/TechnoIndian/Dex2c
    ```
 2. Open the cloned directory.
    ```bash
-   cd dex2c
+   cd Dex2c
    ```
 3. Download **Apktool** latest version from [bitbucket](https://bitbucket.org/iBotPeaches/apktool/downloads/) and save it in `tools` folder with the name `apktool.jar`
    ```bash
@@ -91,7 +91,7 @@ Python 3.8 or higher is required for running this tool. So, make sure your pytho
 
 1. Install required dependencies.
    ```bash
-   pip3 install -r requirements.txt
+   pip3 insall -r requirements.txt
    ```
 2. Install JRE/JDK if you don't have it installed. The recommended JDK version is 11.
    ```bash
@@ -114,8 +114,8 @@ Python 3.8 or higher is required for running this tool. So, make sure your pytho
 
 One Step Installation: Run Below Command
    ```bash
-   pkg install wget && wget -O termux_install.sh https://raw.githubusercontent.com/codehasan/dex2c/termux_install.sh && chmod -R +x termux_install.sh && ./termux_install.sh
-   ```
+pkg install wget -y && wget -O termux_install.sh https://raw.githubusercontent.com/TechnoIndian/Dex2c/master/termux_install.sh && chmod -R +x termux_install.sh && ./termux_install.sh
+```
 > NOTE: Some users have reported about installation errors with latest `clang` on termux. If you happen to face the same issue, then uncomment the lines stated in `termux_install.sh` and then proceed with the installation.
 
 
