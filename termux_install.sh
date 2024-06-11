@@ -21,35 +21,16 @@ note="$(tput setaf 6)"
 echo "${green}━━━ Basic Requirements Setup ━━━${nocolor}"
 
 pkg install -y python git cmake rust clang make wget ndk-sysroot zlib libxml2 libxslt pkg-config libjpeg-turbo build-essential binutils openssl
-# UnComment below line if you face clang error during installation procedure
-# _file=$(find $PREFIX/lib/python3.11/_sysconfigdata*.py)
-# rm -rf $PREFIX/lib/python3.11/__pycache__
-# sed -i 's|-fno-openmp-implicit-rpath||g' "$_file"
+
 pkg install -y python-cryptography
 LDFLAGS="-L${PREFIX}/lib/" CFLAGS="-I${PREFIX}/include/" pip install --upgrade wheel pillow
 pip install cython setuptools
 CFLAGS="-Wno-error=incompatible-function-pointer-types -O0" pip install lxml
 
-
-echo "${green}━━━ Starting SDK Tools installation ━━━${nocolor}"
-if [ -d "android-sdk" ]; then
-  echo "${red}Seems like sdk tools already installed, skipping...${nocolor}"
-elif [ -d "androidide-tools" ]; then
-  rm -rf androidide-tools
-  git clone https://github.com/AndroidIDEOfficial/androidide-tools
-  cd androidide-tools/scripts
-  ./idesetup -c
-else
-  git clone https://github.com/AndroidIDEOfficial/androidide-tools
-  cd androidide-tools/scripts
-  ./idesetup -c
-fi
-
-echo "${yellow}ANDROID SDK TOOLS Successfully Installed!${nocolor}"
-
 cd $HOME
 echo
 echo "${green}━━━ Starting NDK installation ━━━${nocolor}"
+
 echo "Now You'll be asked about which version of NDK to isntall"
 echo "${note}If your Android Version is 9 or above then choose ${red}'9'${nocolor}"
 echo "${note}If your Android Version is below 9 or if you faced issues with '9' (A9 and above users) then choose ${red}'8'${nocolor}"
@@ -88,10 +69,11 @@ echo "${yellow}ANDROID NDK Successfully Installed!${nocolor}"
 cd $HOME
 echo
 echo "${green}━━━ Setting up apktool ━━━${nocolor}"
+
 if [ -f "$PREFIX/bin/apktool.jar" ]; then
   echo "${blue}apktool is already installed${nocolor}"
 else
-  sh -c 'wget https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.9.1.jar -O $PREFIX/bin/apktool.jar'
+  sh -c 'wget https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.9.3.jar -O $PREFIX/bin/apktool.jar'
   
   chmod +r $PREFIX/bin/apktool.jar
   
@@ -99,15 +81,71 @@ else
 fi
 
 cd $HOME
-if [ -d "dex2c" ]; then
-  cd dex2c
+if [ -d "Dex2c" ]; then
+  cd Dex2c
 elif [ -f "dcc.py" ] && [ -d "tools" ]; then
   :
 else
-  git clone https://github.com/ratsan/dex2c || exit 2
-  cd dex2c || exit 2
+  git clone https://github.com/TechnoIndian/Dex2c || exit 2
+  cd Dex2c || exit 2
 fi
 
+cp $PREFIX/bin/apktool.jar $HOME/Dex2c/tools/apktool.jar
+
+cd $HOME
+pkg install openjdk-17 -y || exit 2
+
+cd ~/Dex2c
+python3 -m pip install -U -r requirements.txt || exit 2
+
+if [ -f ".bashrc" ]; then
+  cat <<- EOL >> ~/.bashrc
+export ANDROID_HOME=$HOME/android-sdk
+export PATH=$PATH:$HOME/android-sdk/cmdline-tools/latest/bin
+export PATH=$PATH:$HOME/android-sdk/platform-tools
+export PATH=$PATH:$HOME/android-sdk/build-tools/34.0.4
+export PATH=$PATH:$HOME/android-sdk/ndk/$ndk_version
+export ANDROID_NDK_ROOT=$HOME/android-sdk/ndk/$ndk_version
+EOL
+elif [ -f ".zshrc" ]; then
+  cat <<- EOL >> ~/.zshrc
+export ANDROID_HOME=$HOME/android-sdk
+export PATH=$PATH:$HOME/android-sdk/cmdline-tools/latest/bin
+export PATH=$PATH:$HOME/android-sdk/platform-tools
+export PATH=$PATH:$HOME/android-sdk/build-tools/34.0.4
+export PATH=$PATH:$HOME/android-sdk/ndk/$ndk_version
+export ANDROID_NDK_ROOT=$HOME/android-sdk/ndk/$ndk_version
+EOL
+else
+  cat <<- EOL >> $PREFIX/etc/bash.bashrc
+export ANDROID_HOME=$HOME/android-sdk
+export PATH=$PATH:$HOME/android-sdk/cmdline-tools/latest/bin
+export PATH=$PATH:$HOME/android-sdk/platform-tools
+export PATH=$PATH:$HOME/android-sdk/build-tools/34.0.4
+export PATH=$PATH:$HOME/android-sdk/ndk/$ndk_version
+export ANDROID_NDK_ROOT=$HOME/android-sdk/ndk/$ndk_version
+EOL
+fi
+
+cat > $HOME/Dex2c/dcc.cfg << EOL
+{
+    "apktool": "tools/apktool.jar",
+    "ndk_dir": "$HOME/android-sdk/ndk/$ndk_version",
+    "signature": {
+        "keystore_path": "keystore/debug.keystore",
+        "alias": "androiddebugkey",
+        "keystore_pass": "android",
+        "store_pass": "android",
+        "v1_enabled": true,
+        "v2_enabled": true,
+        "v3_enabled": true
+    }
+}
+EOL
+
+echo "${green}============================"
+echo "Great! Dex2c installed successfully!"
+echo "============================${nocolor}"
 if [ -f "$HOME/dex2c/tools/apktool.jar" ]; then
   rm $HOME/dex2c/tools/apktool.jar
   cp $PREFIX/bin/apktool.jar $HOME/dex2c/tools/apktool.jar
@@ -153,9 +191,9 @@ cat > $HOME/dex2c/dcc.cfg << EOL
     "ndk_dir": "$HOME/android-sdk/ndk/$ndk_version",
     "signature": {
         "keystore_path": "keystore/debug.keystore",
-        "alias": "androiddebugkey",
-        "keystore_pass": "android",
-        "store_pass": "android",
+        "alias": "Techno_India",
+        "keystore_pass": "Rk123456@",
+        "store_pass": "Rk123456@",
         "v1_enabled": true,
         "v2_enabled": true,
         "v3_enabled": true
