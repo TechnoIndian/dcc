@@ -740,11 +740,11 @@ def dcc_main(
         dex2c_file_data = file.read()
 
     dex2c_file_data = dex2c_file_data.replace(
-        'env->FindClass("amimo/dcc/DccApplication");',
+        'env->FindClass("TechnoIndia/RK");',
         'env->FindClass("' + custom_loader.replace(".", "/") + '");',
     )
     dex2c_file_data = dex2c_file_data.replace(
-        "Java_amimo_dcc_DccApplication", "Java_" + custom_loader.replace(".", "_")
+        "Java_TechnoIndia_RK", "Java_" + custom_loader.replace(".", "_")
     )
 
     with open("project/jni/nc/Dex2C.cpp", "w") as file:
@@ -812,7 +812,7 @@ def dcc_main(
 
         filedata = re.sub(pattern, replacement, filedata)
         filedata = filedata.replace(
-            "Lamimo/dcc/DccApplication;", "L" + custom_loader.replace(".", "/") + ";"
+            "LTechnoIndia/RK;", "L" + custom_loader.replace(".", "/") + ";"
         )
 
         with open(temp_loader, "w") as file:
@@ -943,8 +943,8 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--custom-loader",
-        default="amimo.dcc.DccApplication",
-        help="Loader class, default: amimo.dcc.DccApplication",
+        default="TechnoIndia.RK",
+        help="Loader class, default: TechnoIndia.RK",
     )
     parser.add_argument(
         "--skip-synthetic",
