@@ -1,4 +1,4 @@
-.class public Lamimo/dcc/DccApplication;
+.class public LTechnoIndia/RK;
 .super Landroid/app/Application;
 
 
@@ -6,7 +6,7 @@
 .method static final constructor <clinit>()V
     .registers 1
 
-    const-string v0, "stub"
+    const-string v0, "_Techno_India"
 
     invoke-static {v0}, Ljava/lang/System;->loadLibrary(Ljava/lang/String;)V
 
@@ -18,5 +18,3 @@
 
 .method public static final native initDcc()V
 .end method
-
-
