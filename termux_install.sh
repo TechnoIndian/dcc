@@ -81,21 +81,21 @@ else
 fi
 
 cd $HOME
-if [ -d "Dex2c" ]; then
-  cd Dex2c
+if [ -d "dcc" ]; then
+  cd dcc
 elif [ -f "dcc.py" ] && [ -d "tools" ]; then
   :
 else
-  git clone https://github.com/TechnoIndian/Dex2c || exit 2
-  cd Dex2c || exit 2
+  git clone https://github.com/TechnoIndian/dcc || exit 2
+  cd dcc || exit 2
 fi
 
-cp $PREFIX/bin/apktool.jar $HOME/Dex2c/tools/apktool.jar
+cp $PREFIX/bin/apktool.jar $HOME/dcc/tools/apktool.jar
 
 cd $HOME
 pkg install openjdk-17 -y || exit 2
 
-cd ~/Dex2c
+cd ~/dcc
 python3 -m pip install -U -r requirements.txt || exit 2
 
 if [ -f ".bashrc" ]; then
@@ -127,65 +127,7 @@ export ANDROID_NDK_ROOT=$HOME/android-sdk/ndk/$ndk_version
 EOL
 fi
 
-cat > $HOME/Dex2c/dcc.cfg << EOL
-{
-    "apktool": "tools/apktool.jar",
-    "ndk_dir": "$HOME/android-sdk/ndk/$ndk_version",
-    "signature": {
-        "keystore_path": "keystore/debug.keystore",
-        "alias": "androiddebugkey",
-        "keystore_pass": "android",
-        "store_pass": "android",
-        "v1_enabled": true,
-        "v2_enabled": true,
-        "v3_enabled": true
-    }
-}
-EOL
-
-echo "${green}============================"
-echo "Great! Dex2c installed successfully!"
-echo "============================${nocolor}"
-if [ -f "$HOME/dex2c/tools/apktool.jar" ]; then
-  rm $HOME/dex2c/tools/apktool.jar
-  cp $PREFIX/bin/apktool.jar $HOME/dex2c/tools/apktool.jar
-else
-sh -c 'wget https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.9.1.jar -O $HOME/dex2c/tools/apktool.jar'
-fi
-
-cd ~/dex2c
-python3 -m pip install -U -r requirements.txt || exit 2
-
-if [ -f ".bashrc" ]; then
-  cat <<- EOL >> ~/.bashrc
-export ANDROID_HOME=$HOME/android-sdk
-export PATH=$PATH:$HOME/android-sdk/cmdline-tools/latest/bin
-export PATH=$PATH:$HOME/android-sdk/platform-tools
-export PATH=$PATH:$HOME/android-sdk/build-tools/34.0.4
-export PATH=$PATH:$HOME/android-sdk/ndk/$ndk_version
-export ANDROID_NDK_ROOT=$HOME/android-sdk/ndk/$ndk_version
-EOL
-elif [ -f ".zshrc" ]; then
-  cat <<- EOL >> ~/.zshrc
-export ANDROID_HOME=$HOME/android-sdk
-export PATH=$PATH:$HOME/android-sdk/cmdline-tools/latest/bin
-export PATH=$PATH:$HOME/android-sdk/platform-tools
-export PATH=$PATH:$HOME/android-sdk/build-tools/34.0.4
-export PATH=$PATH:$HOME/android-sdk/ndk/$ndk_version
-export ANDROID_NDK_ROOT=$HOME/android-sdk/ndk/$ndk_version
-EOL
-else
-  cat <<- EOL >> $PREFIX/etc/bash.bashrc
-export ANDROID_HOME=$HOME/android-sdk
-export PATH=$PATH:$HOME/android-sdk/cmdline-tools/latest/bin
-export PATH=$PATH:$HOME/android-sdk/platform-tools
-export PATH=$PATH:$HOME/android-sdk/build-tools/34.0.4
-export PATH=$PATH:$HOME/android-sdk/ndk/$ndk_version
-export ANDROID_NDK_ROOT=$HOME/android-sdk/ndk/$ndk_version
-EOL
-fi
-
-cat > $HOME/dex2c/dcc.cfg << EOL
+cat > $HOME/dcc/dcc.cfg << EOL
 {
     "apktool": "tools/apktool.jar",
     "ndk_dir": "$HOME/android-sdk/ndk/$ndk_version",
@@ -202,5 +144,5 @@ cat > $HOME/dex2c/dcc.cfg << EOL
 EOL
 
 echo "${green}============================"
-echo "Great! dex2c installed successfully!"
+echo "Great! dcc installed successfully!"
 echo "============================${nocolor}"
